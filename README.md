@@ -1,55 +1,118 @@
-# HIL (Human-Interaction Language)
+# HIL-Gateway
+### Token Optimization Protocol for SLM→LLM Cascade Architectures
 
-HIL 是一种用于 AI 指令的**结构化中间语言**，目标是以极简符号替代冗余自然语言，降低企业级 AI 部署中的 Token 成本与响应延迟。
+> **HIL-Gateway** is a structured pre-inference protocol that compresses user intent before expensive LLM execution. It is designed for **SLM→LLM cascade systems** where small models handle intent normalization/compression and large models handle deep reasoning.
 
-## 愿景
+---
 
-推动人机交互从“自然语言冗余模式”进化为“结构化高效模式”。
+## Vision (Global Positioning)
 
-## HIL v0.1 语法
+Traditional natural-language prompts are expressive but verbose. HIL-Gateway upgrades interaction from “prompt writing” to a **token optimization protocol** for production AI stacks:
+
+- **SLM layer**: converts redundant human requests into compact HIL commands.
+- **Gateway layer**: enforces policy, observability, and routing.
+- **LLM layer**: executes high-value reasoning with lower token overhead.
+
+**Positioning:** HIL is no longer only a human-computer interaction language; it is a **pre-optimization protocol** for enterprise-grade SLM→LLM orchestration.
+
+---
+
+## Key Metrics
+
+HIL-Gateway is aligned with measurable performance and cost outcomes:
+
+- **~10.7% task-execution accuracy uplift** (structured instruction control benefit).
+- **35%–62% token reduction** in observed RAG competitor-analysis workflows.
+- Enterprise pain-severity baseline:
+  - **Token cost pressure: 85/100**
+  - **Latency pressure: 70/100**
+
+---
+
+## Enterprise Value (SWOT-Aligned)
+
+From a SWOT perspective, HIL-Gateway’s strategic strength is **forward-looking pre-optimization**:
+
+- **Cost control before inference**: compress intent before entering high-cost LLM context windows.
+- **Latency reduction by design**: fewer input tokens reduce processing burden in multi-step chains.
+- **Higher execution consistency**: structured symbols lower prompt ambiguity and improve repeatability.
+- **Architecture readiness**: naturally fits routing, guardrails, and policy layers in enterprise AI gateways.
+
+In short, HIL provides a practical path to **降本增效 (cost-down, efficiency-up)** at the protocol layer.
+
+---
+
+## Measured Data Snapshot (RAG Competitive Analysis)
+
+| Scenario | Traditional Prompt Tokens | HIL Tokens | Tokens Saved | Saving Rate |
+|---|---:|---:|---:|---:|
+| Observed baseline request | 155 | 101 | 54 | 35% |
+| Observed median request | 182 | 82 | 100 | 55% |
+| Observed best-case request | 210 | 80 | 130 | **62%** |
+
+**Current observed range:** **35%–62% token savings**.
+
+---
+
+## HIL Syntax (Current)
 
 - **Action**: `?` Analyze, `!` Create, `>` Transform
-- **Object**: `$` Document/Context, `@` RAG/Knowledge Base
-- **Modifier**: `{z}` 中文输出, `{b}` 列表输出, `{s}` JSON Schema 输出
-- **Param**: `(n)` 限制输出条目数量
+- **Object**: `$` Document/Context, `@` RAG/Knowledge Base, `@vs` Compare & Contrast, `@top` Top Competitive Advantages
+- **Modifier**: `{z}` Chinese output, `{b}` Bullet points, `{s}` JSON schema
+- **Param**: `(n)` limit to `n` points
 
-示例：
-
-```text
-? : $ {z, b} (3)
-```
-
-解码后：
+Example:
 
 ```text
-Please analyze the provided document and in Chinese and using bullet points and limited to 3 points.
+? : @vs(Apple, Tesla) {b} (5)
 ```
 
-## 价值与优势（SWOT 摘要）
+---
 
-- **技术前沿性**：结构化提示可在任务控制上提升一致性，研究结论显示可带来约 **10.7% 的准确性提升**。
-- **市场需求明确**：企业 AI 落地面临高成本痛点，Token 成本严重度 **85/100**，延迟问题严重度 **70/100**。
-- **可扩展性强**：语法可持续扩展，支持更多动作、对象与参数组合。
+## Quick Start (Error-Free Path)
 
-## 项目状态
+### 1) Create environment and install dependencies
 
-- 当前阶段：**阶段 1：MVP 开发（0-6 个月）**
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install tiktoken
+```
 
-## 商业模式
-
-- **开源核心 + SaaS 增值服务** 混合模式
-  - 开源：基础语法、转码器、社区扩展
-  - SaaS：团队协作、策略管理、观测分析、成本优化报表
-
-## 快速开始
+### 2) Run core transcoder demo (no extra runtime dependency issues)
 
 ```bash
 python transcoder.py
+```
+
+### 3) Run benchmark
+
+```bash
 python benchmark.py
 ```
 
-> 运行 `benchmark.py` 需要先安装 `tiktoken`：
+If you see `tiktoken is required`, it means the benchmark dependency is not installed in your current Python environment.
 
-```bash
-pip install tiktoken
-```
+---
+
+## Common Errors
+
+- **Error:** `tiktoken is required. Install with: pip install tiktoken`  
+  **Fix:** activate the correct virtual environment and run `python -m pip install tiktoken`.
+- **Error:** `Invalid HIL command format`  
+  **Fix:** verify command shape like `? : $ {z, b} (3)` or `? : @vs(Apple, Tesla) {b}`.
+
+---
+
+## Project Stage
+
+- **Stage 1 (0–6 months): MVP Engineering**
+
+## Business Model
+
+- **Open-core + SaaS augmentation**
+  - Open source core: protocol spec, transcoder, benchmark tooling
+  - SaaS layer: gateway policies, telemetry, optimization dashboard, team governance
+
+---
