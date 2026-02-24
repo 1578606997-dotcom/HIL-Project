@@ -1,7 +1,7 @@
 # HIL-Gateway
 ### Token Optimization Protocol for SLM→LLM Cascade Architectures
 
-> **HIL-Gateway** is a structured pre-inference protocol that compresses user intent before expensive LLM execution. It is designed for **SLM-LLM cascade systems** where small models handle intent normalization/compression and large models handle deep reasoning.
+> **HIL-Gateway** is a structured pre-inference protocol that compresses user intent before expensive LLM execution. It is designed for **SLM→LLM cascade systems** where small models handle intent normalization/compression and large models handle deep reasoning.
 
 ---
 
@@ -69,32 +69,51 @@ Example:
 
 ---
 
+## Quick Start (Error-Free Path)
+
+### 1) Create environment and install dependencies
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install tiktoken
+```
+
+### 2) Run core transcoder demo (no extra runtime dependency issues)
+
+```bash
+python transcoder.py
+```
+
+### 3) Run benchmark
+
+```bash
+python benchmark.py
+```
+
+If you see `tiktoken is required`, it means the benchmark dependency is not installed in your current Python environment.
+
+---
+
+## Common Errors
+
+- **Error:** `tiktoken is required. Install with: pip install tiktoken`  
+  **Fix:** activate the correct virtual environment and run `python -m pip install tiktoken`.
+- **Error:** `Invalid HIL command format`  
+  **Fix:** verify command shape like `? : $ {z, b} (3)` or `? : @vs(Apple, Tesla) {b}`.
+
+---
+
 ## Project Stage
 
 - **Stage 1 (0–6 months): MVP Engineering**
-
----
 
 ## Business Model
 
 - **Open-core + SaaS augmentation**
   - Open source core: protocol spec, transcoder, benchmark tooling
   - SaaS layer: gateway policies, telemetry, optimization dashboard, team governance
-
----
-
-## Quick Start
-
-```bash
-python transcoder.py
-python benchmark.py
-```
-
-> `benchmark.py` requires `tiktoken`.
-
-```bash
-pip install tiktoken
-```
 
 ---
 
