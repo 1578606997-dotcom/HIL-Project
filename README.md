@@ -116,9 +116,3 @@ If you see `tiktoken is required`, it means the benchmark dependency is not inst
   - SaaS layer: gateway policies, telemetry, optimization dashboard, team governance
 
 ---
-
-## 中文摘要（简版）
-
-HIL-Gateway 已升级为面向 **SLM→LLM 级联架构**的 Token 优化协议：
-先由小模型进行指令压缩，再将高密度结构化输入交给大模型推理。
-当前在 RAG 竞品分析场景中的实测 Token 节省率为 **35%–62%**，并具备约 **10.7%** 的任务执行准确性提升潜力。
