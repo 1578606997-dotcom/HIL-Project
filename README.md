@@ -1,5 +1,12 @@
 # HIL-Gateway
+
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](./test_hil.py)
+
 ### Token Optimization Protocol for SLM→LLM Cascade Architectures
+
+> **压缩用户意图，降低 35%-62% Token 成本**
 
 > **HIL-Gateway** is a structured pre-inference protocol that compresses user intent before expensive LLM execution. It is designed for **SLM→LLM cascade systems** where small models handle intent normalization/compression and large models handle deep reasoning.
 
@@ -71,13 +78,26 @@ Example:
 
 ## Quick Start (Error-Free Path)
 
-### 1) Create environment and install dependencies
+## Installation
+
+```bash
+# 1. Clone repository
+git clone https://github.com/1578606997-dotcom/HIL-Project.git
+cd HIL-Project
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run tests
+pytest test_hil.py -v
+```
+
+### Manual Setup
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install tiktoken
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
 ```
 
 ### 2) Run core transcoder demo (no extra runtime dependency issues)
@@ -105,9 +125,16 @@ If you see `tiktoken is required`, it means the benchmark dependency is not inst
 
 ---
 
-## Project Stage
+## Roadmap
 
-- **Stage 1 (0–6 months): MVP Engineering**
+- ✅ **MVP Complete** - Core transcoder and benchmark
+- 🚧 **Documentation** - Improving guides and examples
+- ⏳ **Community** - Looking for early adopters and feedback
+- ⏳ **Enterprise** - SaaS dashboard and team features
+
+## Contributing
+
+欢迎贡献！请查看 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解如何参与。
 
 ## Business Model
 
