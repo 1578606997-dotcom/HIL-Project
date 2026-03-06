@@ -49,8 +49,9 @@ class HILTranscoderV2:
     _OBJECT_PATTERN = r"(?P<object>[\$@][\w\(\),\s]*)"
     _MODIFIERS_PATTERN = r"(?:\{(?P<modifiers>[^}]*)\})?"
     _LIMIT_PATTERN = r"(?:\((?P<limit>\d+)\))?"
-    _EMOTIONS_PATTERN = r"(?:\[(?P<emotions>[^\]]+)\])?"  # NEW: [!urgent, ~negative]
-    _CONTEXTS_PATTERN = r"(?:\[(?P<contexts>[^\]]+)\])?"   # NEW: [+continuation]
+    # FIXED: contexts 使用 <> 区别于 emotions 的 []
+    _EMOTIONS_PATTERN = r"(?:\[(?P<emotions>[^\]]*)\])?"   # [!urgent,~negative]
+    _CONTEXTS_PATTERN = r"(?:<(?P<contexts>[^>]*)>)?"       # <+continuation>
 
     _COMMAND_RE = re.compile(
         rf"^\s*{_ACTION_PATTERN}\s*:?\s*{_OBJECT_PATTERN}\s*"
@@ -195,7 +196,7 @@ class HILTranscoderV2:
         # 6. Recognize limit
         limit = self._recognize_limit(clean_text)
 
-        # 7. Build HIL
+        # 7. Build HIL (FIXED: contexts 使用 <> 格式)
         parts = [action, ":", object_sym]
         if modifiers:
             parts.append("{" + ",".join(modifiers) + "}")
@@ -204,7 +205,7 @@ class HILTranscoderV2:
         if emotions:
             parts.append("[" + ",".join(emotions) + "]")
         if contexts:
-            parts.append("[" + ",".join(contexts) + "]")
+            parts.append("<" + ",".join(contexts) + ">")  # FIXED: <> 格式
 
         return " ".join(parts)
 
@@ -274,13 +275,13 @@ def test_v2():
         print(f"HIL:  {hil}")
         print(f"解码: {decoded}")
 
-    # 测试 2: 手动构造 HIL
+    # 测试 2: 手动构造 HIL (FIXED: contexts 使用 <> 格式)
     print("\n" + "=" * 60)
     print("【测试 2】手动构造 HIL 解码")
     hil_cases = [
-        "? : $ {z, b} (3) [!urgent] [+continuation]",
+        "? : $ {z, b} (3) [!urgent] <+continuation>",  # FIXED: <> for contexts
         "! : @ {e} [+positive] [?polite]",
-        "> : $ [~negative] [+correction]",
+        "> : $ [~negative] <+correction>",  # FIXED: <> for contexts
     ]
 
     for hil in hil_cases:
