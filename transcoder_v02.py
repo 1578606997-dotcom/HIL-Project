@@ -46,7 +46,7 @@ class HILTranscoderV2:
     """
 
     _ACTION_PATTERN = r"(?P<action>[?!>@])"
-    _OBJECT_PATTERN = r"(?P<object>[\$@][\w\(\),\s]*)"
+    _OBJECT_PATTERN = r"(?P<object>[\$@]\w*)"  # FIXED: 更严格的匹配，不包含括号
     _MODIFIERS_PATTERN = r"(?:\{(?P<modifiers>[^}]*)\})?"
     _LIMIT_PATTERN = r"(?:\((?P<limit>\d+)\))?"
     # FIXED: contexts 使用 <> 区别于 emotions 的 []
